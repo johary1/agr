@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="CandidatureCreateDlg" widgetVar="CandidatureCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateCandidatureTitle}">
+            <h:form id="CandidatureCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{candidatureController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateCandidatureLabel_dateEffet}" for="dateEffet" />
+                        <p:calendar id="dateEffet" pattern="MM/dd/yyyy HH:mm:ss" value="#{candidatureController.selected.dateEffet}" title="#{bundle.EditCandidatureTitle_dateEffet}" required="true" requiredMessage="#{bundle.EditCandidatureRequiredMessage_dateEffet}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateCandidatureLabel_motivation}" for="motivation" />
+                        <p:inputTextarea rows="4" cols="30" id="motivation" value="#{candidatureController.selected.motivation}" title="#{bundle.CreateCandidatureTitle_motivation}" />
+                        <p:outputLabel value="#{bundle.CreateCandidatureLabel_session}" for="session" />
+                        <p:selectOneMenu id="session" value="#{candidatureController.selected.session}" required="true" requiredMessage="#{bundle.EditCandidatureRequiredMessage_session}">
+                            <f:selectItems value="#{sessionController.itemsAvailableSelectOne}"
+                                           var="sessionItem"
+                                           itemValue="#{sessionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCandidatureLabel_personne}" for="personne" />
+                        <p:selectOneMenu id="personne" value="#{candidatureController.selected.personne}" required="true" requiredMessage="#{bundle.EditCandidatureRequiredMessage_personne}">
+                            <f:selectItems value="#{personneController.itemsAvailableSelectOne}"
+                                           var="personneItem"
+                                           itemValue="#{personneItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateCandidatureLabel_idEtatCandidature}" for="idEtatCandidature" />
+                        <p:selectOneMenu id="idEtatCandidature" value="#{candidatureController.selected.idEtatCandidature}" required="true" requiredMessage="#{bundle.EditCandidatureRequiredMessage_idEtatCandidature}">
+                            <f:selectItems value="#{etatCandidatureController.itemsAvailableSelectOne}"
+                                           var="idEtatCandidatureItem"
+                                           itemValue="#{idEtatCandidatureItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{candidatureController.create}" value="#{bundle.Save}" update="display,:CandidatureListForm:datalist,:growl" oncomplete="handleSubmit(args,'CandidatureCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="CandidatureCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

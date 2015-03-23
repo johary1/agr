@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EvaluationViewDlg" widgetVar="EvaluationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewEvaluationTitle}">
+            <h:form id="EvaluationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{evaluationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewEvaluationLabel_idEvaluation}"/>
+                        <h:outputText value="#{evaluationController.selected.idEvaluation}" title="#{bundle.ViewEvaluationTitle_idEvaluation}"/>
+                        <h:outputText value="#{bundle.ViewEvaluationLabel_idSession}"/>
+                        <h:outputText value="#{evaluationController.selected.idSession}" title="#{bundle.ViewEvaluationTitle_idSession}"/>
+                        <h:outputText value="#{bundle.ViewEvaluationLabel_idModule}"/>
+                        <h:outputText value="#{evaluationController.selected.idModule}" title="#{bundle.ViewEvaluationTitle_idModule}"/>
+                        <h:outputText value="#{bundle.ViewEvaluationLabel_idFormateur}"/>
+                        <h:outputText value="#{evaluationController.selected.idFormateur}" title="#{bundle.ViewEvaluationTitle_idFormateur}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="EvaluationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

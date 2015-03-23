@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FormationViewDlg" widgetVar="FormationViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewFormationTitle}">
+            <h:form id="FormationViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{formationController.selected != null}">
+                        <h:outputText value="#{bundle.ViewFormationLabel_idFormation}"/>
+                        <h:outputText value="#{formationController.selected.idFormation}" title="#{bundle.ViewFormationTitle_idFormation}"/>
+                        <h:outputText value="#{bundle.ViewFormationLabel_nom}"/>
+                        <h:outputText value="#{formationController.selected.nom}" title="#{bundle.ViewFormationTitle_nom}"/>
+                        <h:outputText value="#{bundle.ViewFormationLabel_description}"/>
+                        <h:outputText value="#{formationController.selected.description}" title="#{bundle.ViewFormationTitle_description}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="FormationViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

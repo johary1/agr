@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SeanceViewDlg" widgetVar="SeanceViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSeanceTitle}">
+            <h:form id="SeanceViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{seanceController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSeanceLabel_seancePK_fin}"/>
+                        <h:outputText value="#{seanceController.selected.seancePK.fin}" title="#{bundle.ViewSeanceTitle_seancePK_fin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewSeanceLabel_seancePK_debut}"/>
+                        <h:outputText value="#{seanceController.selected.seancePK.debut}" title="#{bundle.ViewSeanceTitle_seancePK_debut}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewSeanceLabel_contenu}"/>
+                        <h:outputText value="#{seanceController.selected.contenu}" title="#{bundle.ViewSeanceTitle_contenu}"/>
+                        <h:outputText value="#{bundle.ViewSeanceLabel_session}"/>
+                        <h:outputText value="#{seanceController.selected.session}" title="#{bundle.ViewSeanceTitle_session}"/>
+                        <h:outputText value="#{bundle.ViewSeanceLabel_salle}"/>
+                        <h:outputText value="#{seanceController.selected.salle}" title="#{bundle.ViewSeanceTitle_salle}"/>
+                        <h:outputText value="#{bundle.ViewSeanceLabel_module}"/>
+                        <h:outputText value="#{seanceController.selected.module}" title="#{bundle.ViewSeanceTitle_module}"/>
+                        <h:outputText value="#{bundle.ViewSeanceLabel_formateur}"/>
+                        <h:outputText value="#{seanceController.selected.formateur}" title="#{bundle.ViewSeanceTitle_formateur}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SeanceViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

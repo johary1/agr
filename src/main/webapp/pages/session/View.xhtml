@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SessionViewDlg" widgetVar="SessionViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewSessionTitle}">
+            <h:form id="SessionViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{sessionController.selected != null}">
+                        <h:outputText value="#{bundle.ViewSessionLabel_idSession}"/>
+                        <h:outputText value="#{sessionController.selected.idSession}" title="#{bundle.ViewSessionTitle_idSession}"/>
+                        <h:outputText value="#{bundle.ViewSessionLabel_nom}"/>
+                        <h:outputText value="#{sessionController.selected.nom}" title="#{bundle.ViewSessionTitle_nom}"/>
+                        <h:outputText value="#{bundle.ViewSessionLabel_dateDebut}"/>
+                        <h:outputText value="#{sessionController.selected.dateDebut}" title="#{bundle.ViewSessionTitle_dateDebut}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewSessionLabel_dateFin}"/>
+                        <h:outputText value="#{sessionController.selected.dateFin}" title="#{bundle.ViewSessionTitle_dateFin}">
+                            <f:convertDateTime pattern="MM/dd/yyyy" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewSessionLabel_description}"/>
+                        <h:outputText value="#{sessionController.selected.description}" title="#{bundle.ViewSessionTitle_description}"/>
+                        <h:outputText value="#{bundle.ViewSessionLabel_dateDebutInscription}"/>
+                        <h:outputText value="#{sessionController.selected.dateDebutInscription}" title="#{bundle.ViewSessionTitle_dateDebutInscription}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewSessionLabel_dateFinInscription}"/>
+                        <h:outputText value="#{sessionController.selected.dateFinInscription}" title="#{bundle.ViewSessionTitle_dateFinInscription}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewSessionLabel_idFormation}"/>
+                        <h:outputText value="#{sessionController.selected.idFormation}" title="#{bundle.ViewSessionTitle_idFormation}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="SessionViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

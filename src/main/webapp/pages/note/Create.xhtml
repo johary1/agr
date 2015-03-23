@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="NoteCreateDlg" widgetVar="NoteCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateNoteTitle}">
+            <h:form id="NoteCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{noteController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateNoteLabel_note}" for="note" />
+                        <p:inputText id="note" value="#{noteController.selected.note}" title="#{bundle.CreateNoteTitle_note}" required="true" requiredMessage="#{bundle.CreateNoteRequiredMessage_note}"/>
+                        <p:outputLabel value="#{bundle.CreateNoteLabel_personne}" for="personne" />
+                        <p:selectOneMenu id="personne" value="#{noteController.selected.personne}" required="true" requiredMessage="#{bundle.EditNoteRequiredMessage_personne}">
+                            <f:selectItems value="#{personneController.itemsAvailableSelectOne}"
+                                           var="personneItem"
+                                           itemValue="#{personneItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.CreateNoteLabel_evaluation}" for="evaluation" />
+                        <p:selectOneMenu id="evaluation" value="#{noteController.selected.evaluation}" required="true" requiredMessage="#{bundle.EditNoteRequiredMessage_evaluation}">
+                            <f:selectItems value="#{evaluationController.itemsAvailableSelectOne}"
+                                           var="evaluationItem"
+                                           itemValue="#{evaluationItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{noteController.create}" value="#{bundle.Save}" update="display,:NoteListForm:datalist,:growl" oncomplete="handleSubmit(args,'NoteCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="NoteCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

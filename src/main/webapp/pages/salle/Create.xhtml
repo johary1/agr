@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SalleCreateDlg" widgetVar="SalleCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSalleTitle}">
+            <h:form id="SalleCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{salleController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateSalleLabel_idSalle}" for="idSalle" />
+                        <p:inputText id="idSalle" value="#{salleController.selected.idSalle}" title="#{bundle.CreateSalleTitle_idSalle}" required="true" requiredMessage="#{bundle.CreateSalleRequiredMessage_idSalle}"/>
+                        <p:outputLabel value="#{bundle.CreateSalleLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{salleController.selected.nom}" title="#{bundle.CreateSalleTitle_nom}" required="true" requiredMessage="#{bundle.CreateSalleRequiredMessage_nom}"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{salleController.create}" value="#{bundle.Save}" update="display,:SalleListForm:datalist,:growl" oncomplete="handleSubmit(args,'SalleCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SalleCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

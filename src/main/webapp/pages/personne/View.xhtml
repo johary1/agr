@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonneViewDlg" widgetVar="PersonneViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewPersonneTitle}">
+            <h:form id="PersonneViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personneController.selected != null}">
+                        <h:outputText value="#{bundle.ViewPersonneLabel_idPersonne}"/>
+                        <h:outputText value="#{personneController.selected.idPersonne}" title="#{bundle.ViewPersonneTitle_idPersonne}"/>
+                        <h:outputText value="#{bundle.ViewPersonneLabel_civilite}"/>
+                        <h:outputText value="#{personneController.selected.civilite}" title="#{bundle.ViewPersonneTitle_civilite}"/>
+                        <h:outputText value="#{bundle.ViewPersonneLabel_prenom}"/>
+                        <h:outputText value="#{personneController.selected.prenom}" title="#{bundle.ViewPersonneTitle_prenom}"/>
+                        <h:outputText value="#{bundle.ViewPersonneLabel_nom}"/>
+                        <h:outputText value="#{personneController.selected.nom}" title="#{bundle.ViewPersonneTitle_nom}"/>
+                        <h:outputText value="#{bundle.ViewPersonneLabel_adresse}"/>
+                        <h:outputText value="#{personneController.selected.adresse}" title="#{bundle.ViewPersonneTitle_adresse}"/>
+                        <h:outputText value="#{bundle.ViewPersonneLabel_codePostal}"/>
+                        <h:outputText value="#{personneController.selected.codePostal}" title="#{bundle.ViewPersonneTitle_codePostal}"/>
+                        <h:outputText value="#{bundle.ViewPersonneLabel_ville}"/>
+                        <h:outputText value="#{personneController.selected.ville}" title="#{bundle.ViewPersonneTitle_ville}"/>
+                        <h:outputText value="#{bundle.ViewPersonneLabel_telephone}"/>
+                        <h:outputText value="#{personneController.selected.telephone}" title="#{bundle.ViewPersonneTitle_telephone}"/>
+                        <h:outputText value="#{bundle.ViewPersonneLabel_telephone2}"/>
+                        <h:outputText value="#{personneController.selected.telephone2}" title="#{bundle.ViewPersonneTitle_telephone2}"/>
+                        <h:outputText value="#{bundle.ViewPersonneLabel_email}"/>
+                        <h:outputText value="#{personneController.selected.email}" title="#{bundle.ViewPersonneTitle_email}"/>
+                        <h:outputText value="#{bundle.ViewPersonneLabel_motPasse}"/>
+                        <h:outputText value="#{personneController.selected.motPasse}" title="#{bundle.ViewPersonneTitle_motPasse}"/>
+                        <h:outputText value="#{bundle.ViewPersonneLabel_dateInscription}"/>
+                        <h:outputText value="#{personneController.selected.dateInscription}" title="#{bundle.ViewPersonneTitle_dateInscription}">
+                            <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                        </h:outputText>
+                        <h:outputText value="#{bundle.ViewPersonneLabel_estInscrite}"/>
+                        <p:selectBooleanCheckbox value="#{personneController.selected.estInscrite}" disabled="true"/>
+                        <h:outputText value="#{bundle.ViewPersonneLabel_formateur}"/>
+                        <h:outputText value="#{personneController.selected.formateur}" title="#{bundle.ViewPersonneTitle_formateur}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="PersonneViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

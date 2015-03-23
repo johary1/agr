@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ModuleViewDlg" widgetVar="ModuleViewDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.ViewModuleTitle}">
+            <h:form id="ModuleViewForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{moduleController.selected != null}">
+                        <h:outputText value="#{bundle.ViewModuleLabel_idModule}"/>
+                        <h:outputText value="#{moduleController.selected.idModule}" title="#{bundle.ViewModuleTitle_idModule}"/>
+                        <h:outputText value="#{bundle.ViewModuleLabel_nom}"/>
+                        <h:outputText value="#{moduleController.selected.nom}" title="#{bundle.ViewModuleTitle_nom}"/>
+                        <h:outputText value="#{bundle.ViewModuleLabel_objectif}"/>
+                        <h:outputText value="#{moduleController.selected.objectif}" title="#{bundle.ViewModuleTitle_objectif}"/>
+                        <h:outputText value="#{bundle.ViewModuleLabel_contenu}"/>
+                        <h:outputText value="#{moduleController.selected.contenu}" title="#{bundle.ViewModuleTitle_contenu}"/>
+                        <h:outputText value="#{bundle.ViewModuleLabel_nbHeures}"/>
+                        <h:outputText value="#{moduleController.selected.nbHeures}" title="#{bundle.ViewModuleTitle_nbHeures}"/>
+                        <h:outputText value="#{bundle.ViewModuleLabel_prerequis}"/>
+                        <h:outputText value="#{moduleController.selected.prerequis}" title="#{bundle.ViewModuleTitle_prerequis}"/>
+                    </p:panelGrid>
+                    <p:commandButton value="#{bundle.Close}" onclick="ModuleViewDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

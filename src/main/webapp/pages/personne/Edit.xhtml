@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="PersonneEditDlg" widgetVar="PersonneEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditPersonneTitle}">
+            <h:form id="PersonneEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{personneController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_idPersonne}" for="idPersonne" />
+                        <p:inputText id="idPersonne" value="#{personneController.selected.idPersonne}" title="#{bundle.EditPersonneTitle_idPersonne}" required="true" requiredMessage="#{bundle.EditPersonneRequiredMessage_idPersonne}"/>
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_civilite}" for="civilite" />
+                        <p:inputText id="civilite" value="#{personneController.selected.civilite}" title="#{bundle.EditPersonneTitle_civilite}" required="true" requiredMessage="#{bundle.EditPersonneRequiredMessage_civilite}"/>
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_prenom}" for="prenom" />
+                        <p:inputText id="prenom" value="#{personneController.selected.prenom}" title="#{bundle.EditPersonneTitle_prenom}" required="true" requiredMessage="#{bundle.EditPersonneRequiredMessage_prenom}"/>
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{personneController.selected.nom}" title="#{bundle.EditPersonneTitle_nom}" required="true" requiredMessage="#{bundle.EditPersonneRequiredMessage_nom}"/>
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_adresse}" for="adresse" />
+                        <p:inputText id="adresse" value="#{personneController.selected.adresse}" title="#{bundle.EditPersonneTitle_adresse}" />
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_codePostal}" for="codePostal" />
+                        <p:inputText id="codePostal" value="#{personneController.selected.codePostal}" title="#{bundle.EditPersonneTitle_codePostal}" />
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_ville}" for="ville" />
+                        <p:inputText id="ville" value="#{personneController.selected.ville}" title="#{bundle.EditPersonneTitle_ville}" />
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_telephone}" for="telephone" />
+                        <p:inputText id="telephone" value="#{personneController.selected.telephone}" title="#{bundle.EditPersonneTitle_telephone}" />
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_telephone2}" for="telephone2" />
+                        <p:inputText id="telephone2" value="#{personneController.selected.telephone2}" title="#{bundle.EditPersonneTitle_telephone2}" />
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_email}" for="email" />
+                        <p:inputText id="email" value="#{personneController.selected.email}" title="#{bundle.EditPersonneTitle_email}" required="true" requiredMessage="#{bundle.EditPersonneRequiredMessage_email}"/>
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_motPasse}" for="motPasse" />
+                        <p:inputText id="motPasse" value="#{personneController.selected.motPasse}" title="#{bundle.EditPersonneTitle_motPasse}" required="true" requiredMessage="#{bundle.EditPersonneRequiredMessage_motPasse}"/>
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_dateInscription}" for="dateInscription" />
+                        <p:calendar id="dateInscription" pattern="MM/dd/yyyy HH:mm:ss" value="#{personneController.selected.dateInscription}" title="#{bundle.EditPersonneTitle_dateInscription}" required="true" requiredMessage="#{bundle.EditPersonneRequiredMessage_dateInscription}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_estInscrite}" for="estInscrite" />
+                        <p:selectBooleanCheckbox id="estInscrite" value="#{personneController.selected.estInscrite}" required="true" requiredMessage="#{bundle.EditPersonneRequiredMessage_estInscrite}"/>
+                        <p:outputLabel value="#{bundle.EditPersonneLabel_formateur}" for="formateur" />
+                        <p:selectOneMenu id="formateur" value="#{personneController.selected.formateur}" >
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{formateurController.itemsAvailableSelectOne}"
+                                           var="formateurItem"
+                                           itemValue="#{formateurItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{personneController.update}" value="#{bundle.Save}" update="display,:PersonneListForm:datalist,:growl" oncomplete="handleSubmit(args, 'PersonneEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="PersonneEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

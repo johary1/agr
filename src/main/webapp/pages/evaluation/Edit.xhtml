@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="EvaluationEditDlg" widgetVar="EvaluationEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditEvaluationTitle}">
+            <h:form id="EvaluationEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{evaluationController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditEvaluationLabel_idEvaluation}" for="idEvaluation" />
+                        <p:inputText id="idEvaluation" value="#{evaluationController.selected.idEvaluation}" title="#{bundle.EditEvaluationTitle_idEvaluation}" required="true" requiredMessage="#{bundle.EditEvaluationRequiredMessage_idEvaluation}"/>
+                        <p:outputLabel value="#{bundle.EditEvaluationLabel_idSession}" for="idSession" />
+                        <p:selectOneMenu id="idSession" value="#{evaluationController.selected.idSession}" required="true" requiredMessage="#{bundle.EditEvaluationRequiredMessage_idSession}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{sessionController.itemsAvailableSelectOne}"
+                                           var="idSessionItem"
+                                           itemValue="#{idSessionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEvaluationLabel_idModule}" for="idModule" />
+                        <p:selectOneMenu id="idModule" value="#{evaluationController.selected.idModule}" required="true" requiredMessage="#{bundle.EditEvaluationRequiredMessage_idModule}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{moduleController.itemsAvailableSelectOne}"
+                                           var="idModuleItem"
+                                           itemValue="#{idModuleItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditEvaluationLabel_idFormateur}" for="idFormateur" />
+                        <p:selectOneMenu id="idFormateur" value="#{evaluationController.selected.idFormateur}" required="true" requiredMessage="#{bundle.EditEvaluationRequiredMessage_idFormateur}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{formateurController.itemsAvailableSelectOne}"
+                                           var="idFormateurItem"
+                                           itemValue="#{idFormateurItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{evaluationController.update}" value="#{bundle.Save}" update="display,:EvaluationListForm:datalist,:growl" oncomplete="handleSubmit(args, 'EvaluationEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="EvaluationEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

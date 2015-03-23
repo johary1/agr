@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="SeanceEditDlg" widgetVar="SeanceEditDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.EditSeanceTitle}">
+            <h:form id="SeanceEditForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{seanceController.selected != null}">
+                        <p:outputLabel value="#{bundle.EditSeanceLabel_seancePK_fin}" for="seancePK_fin" />
+                        <p:calendar id="seancePK_fin" pattern="MM/dd/yyyy HH:mm:ss" value="#{seanceController.selected.seancePK.fin}" title="#{bundle.EditSeanceTitle_seancePK_fin}" required="true" requiredMessage="#{bundle.EditSeanceRequiredMessage_seancePK_fin}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditSeanceLabel_seancePK_debut}" for="seancePK_debut" />
+                        <p:calendar id="seancePK_debut" pattern="MM/dd/yyyy HH:mm:ss" value="#{seanceController.selected.seancePK.debut}" title="#{bundle.EditSeanceTitle_seancePK_debut}" required="true" requiredMessage="#{bundle.EditSeanceRequiredMessage_seancePK_debut}" showOn="button"/>
+                        <p:outputLabel value="#{bundle.EditSeanceLabel_contenu}" for="contenu" />
+                        <p:inputTextarea rows="4" cols="30" id="contenu" value="#{seanceController.selected.contenu}" title="#{bundle.EditSeanceTitle_contenu}" />
+                        <p:outputLabel value="#{bundle.EditSeanceLabel_session}" for="session" />
+                        <p:selectOneMenu id="session" value="#{seanceController.selected.session}" required="true" requiredMessage="#{bundle.EditSeanceRequiredMessage_session}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{sessionController.itemsAvailableSelectOne}"
+                                           var="sessionItem"
+                                           itemValue="#{sessionItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditSeanceLabel_salle}" for="salle" />
+                        <p:selectOneMenu id="salle" value="#{seanceController.selected.salle}" required="true" requiredMessage="#{bundle.EditSeanceRequiredMessage_salle}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{salleController.itemsAvailableSelectOne}"
+                                           var="salleItem"
+                                           itemValue="#{salleItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditSeanceLabel_module}" for="module" />
+                        <p:selectOneMenu id="module" value="#{seanceController.selected.module}" required="true" requiredMessage="#{bundle.EditSeanceRequiredMessage_module}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{moduleController.itemsAvailableSelectOne}"
+                                           var="moduleItem"
+                                           itemValue="#{moduleItem}"/>
+                        </p:selectOneMenu>
+                        <p:outputLabel value="#{bundle.EditSeanceLabel_formateur}" for="formateur" />
+                        <p:selectOneMenu id="formateur" value="#{seanceController.selected.formateur}" required="true" requiredMessage="#{bundle.EditSeanceRequiredMessage_formateur}">
+                            <f:selectItem itemLabel="#{bundle.SelectOneMessage}"/>
+                            <f:selectItems value="#{formateurController.itemsAvailableSelectOne}"
+                                           var="formateurItem"
+                                           itemValue="#{formateurItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{seanceController.update}" value="#{bundle.Save}" update="display,:SeanceListForm:datalist,:growl" oncomplete="handleSubmit(args, 'SeanceEditDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="SeanceEditDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

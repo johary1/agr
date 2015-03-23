@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListSeanceTitle}"></h:outputText>
+        </ui:define>
+
+        <ui:define name="body">
+            <h:form id="SeanceListForm">
+                <p:panel header="#{bundle.ListSeanceTitle}">
+                    <p:dataTable id="datalist" value="#{seanceController.items}" var="item"
+                                 selectionMode="single" selection="#{seanceController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.seancePK}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:ajax event="rowSelect"   update="createButton viewButton editButton deleteButton"/>
+                        <p:ajax event="rowUnselect" update="createButton viewButton editButton deleteButton"/>
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSeanceTitle_seancePK_fin}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.seancePK.fin}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSeanceTitle_seancePK_debut}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.seancePK.debut}">
+                                <f:convertDateTime pattern="MM/dd/yyyy HH:mm:ss" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSeanceTitle_contenu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.contenu}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSeanceTitle_session}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.session}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSeanceTitle_salle}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.salle}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSeanceTitle_module}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.module}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListSeanceTitle_formateur}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.formateur}"/>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="createButton" icon="ui-icon-plus"   value="#{bundle.Create}" actionListener="#{seanceController.prepareCreate}" update=":SeanceCreateForm" oncomplete="PF('SeanceCreateDialog').show()"/>
+                            <p:commandButton id="viewButton"   icon="ui-icon-search" value="#{bundle.View}" update=":SeanceViewForm" oncomplete="PF('SeanceViewDialog').show()" disabled="#{empty seanceController.selected}"/>
+                            <p:commandButton id="editButton"   icon="ui-icon-pencil" value="#{bundle.Edit}" update=":SeanceEditForm" oncomplete="PF('SeanceEditDialog').show()" disabled="#{empty seanceController.selected}"/>
+                            <p:commandButton id="deleteButton" icon="ui-icon-trash"  value="#{bundle.Delete}" actionListener="#{seanceController.destroy}" update=":growl,datalist" disabled="#{empty seanceController.selected}"/>
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+
+            <ui:include src="Create.xhtml"/>
+            <ui:include src="Edit.xhtml"/>
+            <ui:include src="View.xhtml"/>
+        </ui:define>
+    </ui:composition>
+
+</html>

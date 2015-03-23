@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="ModuleCreateDlg" widgetVar="ModuleCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateModuleTitle}">
+            <h:form id="ModuleCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{moduleController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateModuleLabel_idModule}" for="idModule" />
+                        <p:inputText id="idModule" value="#{moduleController.selected.idModule}" title="#{bundle.CreateModuleTitle_idModule}" required="true" requiredMessage="#{bundle.CreateModuleRequiredMessage_idModule}"/>
+                        <p:outputLabel value="#{bundle.CreateModuleLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{moduleController.selected.nom}" title="#{bundle.CreateModuleTitle_nom}" required="true" requiredMessage="#{bundle.CreateModuleRequiredMessage_nom}"/>
+                        <p:outputLabel value="#{bundle.CreateModuleLabel_objectif}" for="objectif" />
+                        <p:inputText id="objectif" value="#{moduleController.selected.objectif}" title="#{bundle.CreateModuleTitle_objectif}" />
+                        <p:outputLabel value="#{bundle.CreateModuleLabel_contenu}" for="contenu" />
+                        <p:inputText id="contenu" value="#{moduleController.selected.contenu}" title="#{bundle.CreateModuleTitle_contenu}" />
+                        <p:outputLabel value="#{bundle.CreateModuleLabel_nbHeures}" for="nbHeures" />
+                        <p:inputText id="nbHeures" value="#{moduleController.selected.nbHeures}" title="#{bundle.CreateModuleTitle_nbHeures}" />
+                        <p:outputLabel value="#{bundle.CreateModuleLabel_prerequis}" for="prerequis" />
+                        <p:inputText id="prerequis" value="#{moduleController.selected.prerequis}" title="#{bundle.CreateModuleTitle_prerequis}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{moduleController.create}" value="#{bundle.Save}" update="display,:ModuleListForm:datalist,:growl" oncomplete="handleSubmit(args,'ModuleCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="ModuleCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

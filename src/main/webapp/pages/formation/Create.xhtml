@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FormationCreateDlg" widgetVar="FormationCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateFormationTitle}">
+            <h:form id="FormationCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{formationController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFormationLabel_idFormation}" for="idFormation" />
+                        <p:inputText id="idFormation" value="#{formationController.selected.idFormation}" title="#{bundle.CreateFormationTitle_idFormation}" required="true" requiredMessage="#{bundle.CreateFormationRequiredMessage_idFormation}"/>
+                        <p:outputLabel value="#{bundle.CreateFormationLabel_nom}" for="nom" />
+                        <p:inputText id="nom" value="#{formationController.selected.nom}" title="#{bundle.CreateFormationTitle_nom}" required="true" requiredMessage="#{bundle.CreateFormationRequiredMessage_nom}"/>
+                        <p:outputLabel value="#{bundle.CreateFormationLabel_description}" for="description" />
+                        <p:inputTextarea rows="4" cols="30" id="description" value="#{formationController.selected.description}" title="#{bundle.CreateFormationTitle_description}" />
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{formationController.create}" value="#{bundle.Save}" update="display,:FormationListForm:datalist,:growl" oncomplete="handleSubmit(args,'FormationCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FormationCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

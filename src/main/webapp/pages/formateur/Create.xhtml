@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="FormateurCreateDlg" widgetVar="FormateurCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateFormateurTitle}">
+            <h:form id="FormateurCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{formateurController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateFormateurLabel_idPersonne}" for="idPersonne" />
+                        <p:inputText id="idPersonne" value="#{formateurController.selected.idPersonne}" title="#{bundle.CreateFormateurTitle_idPersonne}" required="true" requiredMessage="#{bundle.CreateFormateurRequiredMessage_idPersonne}"/>
+                        <p:outputLabel value="#{bundle.CreateFormateurLabel_dateEntree}" for="dateEntree" />
+                        <p:calendar id="dateEntree" pattern="MM/dd/yyyy" value="#{formateurController.selected.dateEntree}" title="#{bundle.EditFormateurTitle_dateEntree}"  showOn="button"/>
+                        <p:outputLabel value="#{bundle.CreateFormateurLabel_personne}" for="personne" />
+                        <p:selectOneMenu id="personne" value="#{formateurController.selected.personne}" required="true" requiredMessage="#{bundle.EditFormateurRequiredMessage_personne}">
+                            <f:selectItems value="#{personneController.itemsAvailableSelectOne}"
+                                           var="personneItem"
+                                           itemValue="#{personneItem}"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{formateurController.create}" value="#{bundle.Save}" update="display,:FormateurListForm:datalist,:growl" oncomplete="handleSubmit(args,'FormateurCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="FormateurCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>
